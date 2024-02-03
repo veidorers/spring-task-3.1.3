@@ -5,10 +5,15 @@
     <title>User</title>
 </head>
 <body>
+<a th:href="@{/logout}">
+    <button>Sign out</button>
+</a>
+<br/>
 <a href="/admin">All people</a>
 
 <div th:text="${user.getName()} + ', ' + ${user.getAge()}"></div>
 <div th:text="${user.getGender()}"></div>
+<p th:text="${#strings.setJoin(user.getRoles(), ', ')}"></p>
 
 <br/>
 

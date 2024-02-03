@@ -5,6 +5,10 @@
     <title>Users</title>
 </head>
 <body>
+<a th:href="@{/logout}">
+    <button>Sign out</button>
+</a>
+<br/>
 <div th:each="user: ${users}">
     <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getName()}"></a>
 </div>

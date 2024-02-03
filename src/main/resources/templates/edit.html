@@ -5,6 +5,10 @@
     <title>Edit</title>
 </head>
 <body>
+<a th:href="@{/logout}">
+    <button>Sign out</button>
+</a>
+<br/>
 <a href="/admin">All people</a>
 
 <form th:method="PATCH" th:action="@{/admin/{id}(id = ${user.getId()})}" th:object="${user}">
@@ -24,8 +28,11 @@
                 th:value="${gender}" th:text="${gender}"></option>
     </select>
 
-    <label for="roles">Enter roles:</label>
-    <input type="text" th:field="*{roles}" id="roles"/>
+    <label for="roles">Select roles:</label>
+    <select multiple="multiple" th:field="*{roles}" id="roles">
+        <option th:each="role : ${T(ru.kata.spring.boot_security.demo.model.Role).values()}"
+                th:value="${role}" th:text="${role}"></option>
+    </select>
 
     <input type="submit" value="Update"/>
 </form>

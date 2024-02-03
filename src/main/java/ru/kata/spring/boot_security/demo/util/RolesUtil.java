@@ -3,44 +3,58 @@ package ru.kata.spring.boot_security.demo.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.model.Gender;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.annotation.PostConstruct;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 @Component
 public class RolesUtil {
     private final UserService userService;
-    private final RoleRepository roleRepository;
 
     @Autowired
-    public RolesUtil(UserService userService, RoleRepository roleRepository) {
+    public RolesUtil(UserService userService) {
         this.userService = userService;
-        this.roleRepository = roleRepository;
     }
+
+//    @Transactional
+//    @PostConstruct
+//    public void createAdmin() {
+//        var mayBeAdminRole = roleRepository.findByName("ROLE_ADMIN");
+//        Role adminRole = null;
+//        if(mayBeAdminRole.isEmpty()) {
+//            var role = new Role();
+//            role.setName("ROLE_ADMIN");
+//            adminRole = roleRepository.save(role);
+//        } else {
+//            adminRole = mayBeAdminRole.get();
+//        }
+//
+//        if(userService.findByRole(adminRole).isEmpty()) {
+//            var admin = User.builder()
+//                    .name("admin")
+//                    .password("admin")
+//                    .roles(Set.of(adminRole))
+//                    .build();
+//            userService.save(admin);
+//        }
+//    }
 
     @Transactional
     @PostConstruct
     public void createAdmin() {
-        var mayBeAdminRole = roleRepository.findByName("ROLE_ADMIN");
-        Role adminRole = null;
-        if(mayBeAdminRole.isEmpty()) {
-            var role = new Role();
-            role.setName("ROLE_ADMIN");
-            adminRole = roleRepository.save(role);
-        } else {
-            adminRole = mayBeAdminRole.get();
-        }
-
-        if(userService.findByRole(adminRole).isEmpty()) {
+        var mayBeAdmin = userService.findByRole(Role.ROLE_ADMIN);
+        if (mayBeAdmin.isEmpty()) {
             var admin = User.builder()
                     .name("admin")
                     .password("admin")
-                    .roles(Set.of(adminRole))
+                    .age(30)
+                    .gender(Gender.MALE)
+                    .roles(Set.of(Role.ROLE_ADMIN))
                     .build();
             userService.save(admin);
         }

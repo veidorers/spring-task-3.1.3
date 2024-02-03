@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+    <label for="name">Enter name:</label>
+    <input type="text" th:field="*{name}" id="name"/>
+
+    <label for="password">Enter password:</label>
+    <input type="password" th:field="*{name}" id="password"/>
+
+    <label for="age">Enter age:</label>
+    <input type="number" th:field="*{age}" id="age"/>
+
+    <select th:object="${user}" th:field="*{gender}">
+        <option th:each="gender : ${T(ru.kata.spring.boot_security.demo.model.Gender).values()}"
+                th:value="${gender}" th:text="${gender}"></option>
+    </select>
+
+    <label for="roles">Enter role name:</label>
+    <input type="text" th:field="*{roles}" id="roles"/>
+
+    <input type="submit" value="Add"/>
+</form>
+</body>
+</html>

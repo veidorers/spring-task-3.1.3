@@ -13,7 +13,7 @@
 
 <div th:text="${user.getName()} + ', ' + ${user.getAge()}"></div>
 <div th:text="${user.getGender()}"></div>
-<p th:text="${#strings.setJoin(user.getRoles(), ', ')}"></p>
+<p th:text="${#strings.setJoin(user.roles.![title], ', ')}"></p>
 
 <br/>
 

@@ -35,7 +35,7 @@
     <label for="roles">Select roles:</label>
     <select multiple="multiple" th:field="*{roles}" id="roles">
         <option th:each="role : ${T(ru.kata.spring.boot_security.demo.model.Role).values()}"
-                th:value="${role}" th:text="${role}"></option>
+                th:value="${role.name()}" th:text="${role.getTitle()}"></option>
     </select> <br/>
 
     <input type="submit" value="Update"/> <br/>

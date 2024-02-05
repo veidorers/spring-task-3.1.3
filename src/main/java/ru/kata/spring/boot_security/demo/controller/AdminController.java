@@ -3,9 +3,12 @@ package ru.kata.spring.boot_security.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,7 +38,11 @@ public class AdminController {
     }
 
     @PostMapping
-    public String add(@ModelAttribute("user") User user) {
+    public String add(@ModelAttribute("user") @Valid User user,
+                      BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "add";
+        }
         userService.save(user);
         return "redirect:/admin";
     }
@@ -48,7 +55,11 @@ public class AdminController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user) {
+    public String update(@ModelAttribute("user") @Valid User user,
+                         BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "edit";
+        }
         userService.update(user);
         return "redirect:/admin/" + user.getId();
     }

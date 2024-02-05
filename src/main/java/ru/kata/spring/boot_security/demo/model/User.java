@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +7,11 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -22,12 +26,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Name must not be empty")
+    @Size(min = 1, max = 30, message = "Name size must be between 1 and 30")
     private String name;
 
+    @NotEmpty(message = "Password must not be empty")
+    @Size(min = 4, message = "Password size must be greater than 4")
     private String password;
 
+    @Min(value = 0, message = "Age must be greater than or equal to 0")
     private int age;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
 

@@ -9,7 +9,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.Set;
 
 @Component
@@ -20,29 +19,6 @@ public class RolesUtil {
     public RolesUtil(UserService userService) {
         this.userService = userService;
     }
-
-//    @Transactional
-//    @PostConstruct
-//    public void createAdmin() {
-//        var mayBeAdminRole = roleRepository.findByName("ROLE_ADMIN");
-//        Role adminRole = null;
-//        if(mayBeAdminRole.isEmpty()) {
-//            var role = new Role();
-//            role.setName("ROLE_ADMIN");
-//            adminRole = roleRepository.save(role);
-//        } else {
-//            adminRole = mayBeAdminRole.get();
-//        }
-//
-//        if(userService.findByRole(adminRole).isEmpty()) {
-//            var admin = User.builder()
-//                    .name("admin")
-//                    .password("admin")
-//                    .roles(Set.of(adminRole))
-//                    .build();
-//            userService.save(admin);
-//        }
-//    }
 
     @Transactional
     @PostConstruct

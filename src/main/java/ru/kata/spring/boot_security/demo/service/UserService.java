@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAllWithRoles();
     }
 
     @Transactional
@@ -36,7 +36,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User findById(long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findByIdWithRoles(id).orElse(null);
     }
 
     @Transactional
@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void delete(Long id) {
-        userRepository.delete(userRepository.findById(id).orElse(null));
+        userRepository.delete(userRepository.findByIdWithRoles(id).orElse(null));
     }
 
     public List<User> findByRole(Role role) {
@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var mayBeUser = userRepository.findByName(username);
+        var mayBeUser = userRepository.findByNameWithRoles(username);
         if (mayBeUser.isPresent()) {
             return mayBeUser.get();
         } else {

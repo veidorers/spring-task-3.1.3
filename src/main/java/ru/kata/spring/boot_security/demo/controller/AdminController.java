@@ -22,24 +22,29 @@ public class AdminController {
 
     @GetMapping
     public String index(Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         model.addAttribute("users", userService.findAll());
         return "index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         model.addAttribute("user", userService.findById(id));
         return "show";
     }
 
     @GetMapping("/add")
-    public String addPage(@ModelAttribute("user") User user) {
+    public String addPage(@ModelAttribute("user") User user, Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         return "add";
     }
 
     @PostMapping
     public String add(@ModelAttribute("user") @Valid User user,
-                      BindingResult bindingResult) {
+                      BindingResult bindingResult,
+                      Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         if(bindingResult.hasErrors()) {
             return "add";
         }
@@ -50,13 +55,16 @@ public class AdminController {
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable("id") Long id,
                            Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         model.addAttribute("user", userService.findById(id));
         return "edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") @Valid User user,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult,
+                         Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         if(bindingResult.hasErrors()) {
             return "edit";
         }
@@ -65,7 +73,9 @@ public class AdminController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id,
+                         Model model) {
+        model.addAttribute("currentUser", userService.getCurrentUser());
         userService.delete(id);
         return "redirect:/admin";
     }

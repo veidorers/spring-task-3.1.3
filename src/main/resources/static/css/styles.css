@@ -1,0 +1,31 @@
+/* Custom CSS for sidebar */
+.sidebar {
+    background-color: #ffffff; /* Set sidebar background color to white */
+    height: 100vh; /* Set sidebar height to full viewport height */
+    border-right: 1px solid #dddddd; /* Add border to separate sidebar from main content */
+    padding: 20px; /* Add padding for spacing */
+}
+
+/* Custom CSS for main content */
+.main-content {
+    background-color: whitesmoke; /* Set main content background color to whitesmoke */
+    height: 100vh; /* Set main content height to full viewport height */
+    padding: 20px; /* Add padding for spacing */
+}
+.active-link {
+    background-color: dodgerblue;
+    color: white;
+}
+
+.inactive-link {
+    background-color: white;
+    color: blue;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}

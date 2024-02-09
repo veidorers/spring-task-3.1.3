@@ -28,10 +28,10 @@
         <!-- Sidebar -->
         <div class="col-md-2 sidebar">
             <div class="nav flex-column">
-                <a th:href="@{/admin}" th:class="${#strings.startsWith(#httpServletRequest.getRequestURI(), '/admin') ? 'active-link' : 'inactive-link'}">
+                <a th:href="@{/admin}" th:class="${#strings.startsWith(#httpServletRequest.getRequestURI(), '/admin') ? 'active-sidebar-link' : 'inactive-sidebar-link'}">
                     Admin
                 </a>
-                <a th:href="@{/user}" th:class="${#strings.startsWith(#httpServletRequest.getRequestURI(), '/user') ? 'active-link' : 'inactive-link'}">
+                <a th:href="@{/user}" th:class="${#strings.startsWith(#httpServletRequest.getRequestURI(), '/user') ? 'active-sidebar-link' : 'inactive-sidebar-link'}">
                     User
                 </a>
             </div>

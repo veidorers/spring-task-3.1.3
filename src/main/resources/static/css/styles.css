@@ -12,12 +12,12 @@
     height: 100vh; /* Set main content height to full viewport height */
     padding: 20px; /* Add padding for spacing */
 }
-.active-link {
+.active-sidebar-link {
     background-color: dodgerblue;
     color: white;
 }
 
-.inactive-link {
+.inactive-sidebar-link {
     background-color: white;
     color: blue;
 }
@@ -29,3 +29,8 @@
     border-radius: 5px;
     margin-bottom: 5px;
 }
+
+ .custom-table {
+     width: 90%;
+     margin: 0 auto; /* Centers the table horizontally within the container */
+ }

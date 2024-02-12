@@ -56,6 +56,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByRolesContaining(role);
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var mayBeUser = userRepository.findByNameWithRoles(username);

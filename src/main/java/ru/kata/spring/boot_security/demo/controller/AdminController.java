@@ -52,14 +52,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editPage(@PathVariable("id") Long id,
-                           Model model) {
-        model.addAttribute("currentUser", userService.getCurrentUser());
-        model.addAttribute("user", userService.findById(id));
-        return "edit";
-    }
-
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult,
@@ -69,7 +61,7 @@ public class AdminController {
             return "edit";
         }
         userService.update(user);
-        return "redirect:/admin/" + user.getId();
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")

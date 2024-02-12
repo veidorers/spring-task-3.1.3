@@ -27,13 +27,6 @@ public class AdminController {
         return "index";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("currentUser", userService.getCurrentUser());
-        model.addAttribute("user", userService.findById(id));
-        return "show";
-    }
-
     @GetMapping("/add")
     public String addPage(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("currentUser", userService.getCurrentUser());
@@ -41,25 +34,17 @@ public class AdminController {
     }
 
     @PostMapping
-    public String add(@ModelAttribute("user") @Valid User user,
-                      BindingResult bindingResult,
+    public String add(@ModelAttribute("user") User user,
                       Model model) {
         model.addAttribute("currentUser", userService.getCurrentUser());
-        if(bindingResult.hasErrors()) {
-            return "add";
-        }
         userService.save(user);
         return "redirect:/admin";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") @Valid User user,
-                         BindingResult bindingResult,
+    public String update(@ModelAttribute("user") User user,
                          Model model) {
         model.addAttribute("currentUser", userService.getCurrentUser());
-        if(bindingResult.hasErrors()) {
-            return "edit";
-        }
         userService.update(user);
         return "redirect:/admin";
     }

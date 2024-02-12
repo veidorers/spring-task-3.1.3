@@ -26,18 +26,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Name must not be empty")
-    @Size(min = 1, max = 30, message = "Name size must be between 1 and 30")
     private String name;
 
-    @NotEmpty(message = "Password must not be empty")
-    @Size(min = 4, message = "Password size must be greater than 4")
     private String password;
 
-    @Min(value = 0, message = "Age must be greater than or equal to 0")
     private int age;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
